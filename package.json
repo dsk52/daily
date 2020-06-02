@@ -1,0 +1,43 @@
+{
+  "name": "daily",
+  "version": "1.0.0",
+  "description": "my daily note app",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "typesync || :",
+    "postinstall": "typesync && npm install --ignore-scripts",
+    "start": "webpack-dev-server --mode development --config webpack.config.dev.js",
+    "build": "NODE_ENV='production' && webpack --mode production --config webpack.config.prod.js"
+  },
+  "keywords": [],
+  "author": "Daisuke KONISHI",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "css-loader": "^3.5.3",
+    "eslint": "^7.1.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-react": "^7.20.0",
+    "fork-ts-checker-webpack-plugin": "^4.1.6",
+    "html-webpack-plugin": "^4.3.0",
+    "source-map-loader": "^1.0.0",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.3",
+    "typescript-eslint": "0.0.1-alpha.0",
+    "typesync": "^0.7.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "firebase": "^7.14.6",
+    "firebase-admin": "^8.12.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  }
+}
