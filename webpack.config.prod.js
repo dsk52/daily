@@ -2,10 +2,12 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const MODE = 'production';
 
 module.exports = {
-  mode: 'production',
+  mode: MODE,
 
   entry: './src/index.tsx',
   output: {
@@ -22,6 +24,16 @@ module.exports = {
         use: [
           {
             loader: 'ts-loader'
+          }
+        ]
+      },
+      {
+        test: /\.css/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { url: false }
           }
         ]
       },
@@ -49,6 +61,9 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" })
   ],
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
 
   resolve: {
     extensions: ['.js', '.ts'],

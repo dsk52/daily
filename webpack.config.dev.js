@@ -4,8 +4,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 
+const MODE = 'development';
+
 module.exports = {
-  mode: 'production',
+  mode: MODE,
 
   entry: './src/index.tsx',
   output: {
@@ -22,6 +24,16 @@ module.exports = {
         use: [
           {
             loader: 'ts-loader'
+          }
+        ]
+      },
+      {
+        test: /\.css/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { url: false }
           }
         ]
       },
