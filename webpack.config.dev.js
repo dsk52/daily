@@ -59,7 +59,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new HtmlWebpackPlugin({ template: "./public/index.html" })
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public/index.html'),
+      inject: 'body',
+      hash: true,
+    })
   ],
 
   resolve: {
