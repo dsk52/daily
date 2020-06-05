@@ -1,13 +1,12 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
+import { AppRouter } from 'router/AppRouter';
+
 import 'sanitize.css';
 
-const App = () => (
-  <div>Hello</div>
-)
 
 ReactDOM.render(
-  <App />,
+  <AppRouter />,
   document.getElementById('root')
 )
