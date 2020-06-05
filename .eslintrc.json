@@ -1,6 +1,7 @@
 {
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended"
   ],
@@ -15,8 +16,9 @@
     }
   },
   "plugins": [
-    "@typescript-eslint",
-    "react"
+    "react",
+    "react-hooks",
+    "@typescript-eslint"
   ],
   "rules": {
     "no-unused-vars": "off",
