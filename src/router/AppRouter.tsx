@@ -1,20 +1,21 @@
 import * as React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-
+import PrivateRoute from 'utilities/PrivateRoute';
 import { NotFound } from '../pages/NotFound';
-import { Index } from '../pages/Index';
-import { Auth } from '../pages/auth/index'
+import {Index} from '../pages/Index';
+import { List } from '../pages/dialy/List'
+import { AuthProvider } from 'providers/AuthProvider';
 
-const AppRouter: React.FC = () => (
+export const AppRouter: React.FC = () => (
   <Router>
     <Switch>
-      <Route path="/auth" render={() => <Auth />} />
-      <Route exact={true} path={['/', '']} render={() => <Index />}/>
-      <Route path="*" render={() => <NotFound />} />
+      <AuthProvider>
+        <PrivateRoute path='/dialy/list' component={List} />
+        <Redirect path='/dialy' to="/dialy/list" />
+        <Route exact={true} path={['/', '']}  component={Index}/>
+      </AuthProvider>
+      <Route path="*" component={NotFound} />
     </Switch>
   </Router>
 )
-
-
-export { AppRouter }

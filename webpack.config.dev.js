@@ -48,7 +48,7 @@ module.exports = {
         loader: 'eslint-loader',
         options: {
           fix: true,
-          cache: true,
+          cache: false,
         },
       }
     ]
@@ -73,8 +73,10 @@ module.exports = {
 
   devServer: {
     contentBase: path.join(__dirname, 'build'),
-    compress: true,
+    watchContentBase: true,
+    compress: false,
+    hot: true,
     port: 9000,
-    historyApiFallback: true
+    historyApiFallback: true,
   }
 }

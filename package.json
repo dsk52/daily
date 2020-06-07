@@ -2,7 +2,7 @@
   "name": "daily",
   "version": "1.0.0",
   "description": "my daily note app",
-  "main": "index.tsx",
+  "main": "build/index.html",
   "scripts": {
     "preinstall": "typesync || :",
     "postinstall": "typesync && npm install --ignore-scripts",
