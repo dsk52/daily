@@ -28,7 +28,7 @@ const signOut = async (history) => {
 
   try {
     await firebase.auth().signOut()
-    history.push('/')
+    history.replace('/')
   } catch (error) {
     console.error(error);
   }

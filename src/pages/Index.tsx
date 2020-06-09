@@ -3,7 +3,7 @@ import { AuthContext } from "providers/AuthProvider";
 import { useHistory } from 'react-router-dom';
 
 const Index: React.FC = () => {
-  const { user, loginWithTwitter } = useContext(AuthContext);
+  const { loginWithTwitter } = useContext(AuthContext);
   const history = useHistory()
 
   return (

@@ -10,9 +10,11 @@ import { AuthProvider } from 'providers/AuthProvider';
 export const AppRouter: React.FC = () => (
   <Router>
     <Switch>
+      <Route path='/dialy/list' component={List} />
+    <Redirect path='/dialy' to="/dialy/list" />
       <AuthProvider>
-        <PrivateRoute path='/dialy/list' component={List} />
-        <Redirect path='/dialy' to="/dialy/list" />
+        {/* <PrivateRoute path='/dialy/list' component={List} /> */}
+        {/* <Redirect path='/dialy' to="/dialy/list" /> */}
         <Route exact={true} path={['/', '']}  component={Index}/>
       </AuthProvider>
       <Route path="*" component={NotFound} />
