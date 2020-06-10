@@ -10,6 +10,7 @@ export const List: React.FC = () => {
   return (
     <div>
       <h2>list</h2>
+      <Link to='/daily/add'>書く</Link>
       <button onClick={() => signOut(history)}>Sign out</button>
     </div>
   )
