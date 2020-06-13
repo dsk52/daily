@@ -5,14 +5,18 @@ import PrivateRoute from 'utilities/PrivateRoute';
 import { NotFound } from '../pages/NotFound';
 import {Index} from '../pages/Index';
 import { List } from '../pages/dialy/List'
+import { Add } from '../pages/dialy/Add'
 import { AuthProvider } from 'providers/AuthProvider';
 
 export const AppRouter: React.FC = () => (
   <Router>
     <Switch>
+      <Route path='/daily/add' component={Add} />
+      <Route path='/daily/list' component={List} />
+      <Redirect path='/daily' to="/daily/list" />
       <AuthProvider>
-        <PrivateRoute path='/dialy/list' component={List} />
-        <Redirect path='/dialy' to="/dialy/list" />
+        {/* <PrivateRoute path='/dialy/list' component={List} /> */}
+        {/* <Redirect path='/dialy' to="/dialy/list" /> */}
         <Route exact={true} path={['/', '']}  component={Index}/>
       </AuthProvider>
       <Route path="*" component={NotFound} />

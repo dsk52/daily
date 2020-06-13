@@ -11,4 +11,6 @@ export const providerTwitter = new firebase.auth.TwitterAuthProvider();
 const db = firebase.firestore();
 const storage = firebase.storage().ref();
 
-export { firebase, db, storage };
+const postCollection = 'posts'
+
+export { firebase, db, storage, postCollection };
