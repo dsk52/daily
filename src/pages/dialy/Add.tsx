@@ -5,6 +5,7 @@ import { firebase } from '../../firebase/app';
 
 const post = async (history) => {
   try {
+    // モック
     await db.collection(postCollection).add({
       'author_id': 1,
       'title': '',
