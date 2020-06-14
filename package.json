@@ -8,7 +8,9 @@
     "postinstall": "typesync && npm install --ignore-scripts",
     "lint": "./node_modules/.bin/eslint src/**/*.{ts,tsx}",
     "start": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "NODE_ENV='production' && webpack --config webpack.config.prod.js"
+    "build": "NODE_ENV='production' && webpack --config webpack.config.prod.js",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy": "firebase deploy"
   },
   "private": true,
   "keywords": [],

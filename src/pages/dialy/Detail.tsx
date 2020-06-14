@@ -28,6 +28,10 @@ const backToList = (history: H.History) => {
   history.push('/daily/list')
 }
 
+const update = (id: string, history: H.History) => {
+  history.push(`/daily/update/${id}`)
+}
+
 export const Detail: React.FC = () => {
   const [post, setPost] = React.useState<Post>(null)
   const history = useHistory()
@@ -56,12 +60,13 @@ export const Detail: React.FC = () => {
         <>
           <div>
             <button type="button" onClick={() => backToList(history)}>一覧に戻る</button>
+            <button type="button" onClick={() => update(params.id, history)}>編集</button>
           </div>
           <header>
             <h1>{post.title}</h1>
           </header>
           <div className="body">
-            {post.title}
+            {post.body}
           </div>
         </>
       ) : null}

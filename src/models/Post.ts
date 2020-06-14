@@ -8,7 +8,12 @@ export type Post = {
   updated_at?: firebase.firestore.FieldValue;
 }
 
-export const createPostModel = (data): Post => {
+type json = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
+}
+
+export const createPostModel = (data: json): Post => {
   return {
     id: data.id,
     title: data.title,

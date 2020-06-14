@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { firebase, providerTwitter } from '../firebase/app';
-import { useHistory } from 'react-router-dom';
+import * as H from 'history'
 
 const context = {
   user: null,
@@ -14,7 +14,7 @@ type AuthProviderProp = {
 
 export const AuthContext = React.createContext(context);
 
-const loginWithTwitter = async (history) => {
+const loginWithTwitter = async (history: H.History) => {
   try {
     await firebase.auth().signInWithRedirect(providerTwitter)
     history.push('/daily/list')
@@ -23,7 +23,7 @@ const loginWithTwitter = async (history) => {
   }
 }
 
-const signOut = async (history) => {
+const signOut = async (history: H.History) => {
   console.log('do signout');
 
   try {
