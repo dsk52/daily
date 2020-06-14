@@ -2,11 +2,25 @@ import * as React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as H from 'history'
 import { db, postCollection } from 'firebase/app'
-import { Post, createPostModel } from 'models/Post'
+import { Post, createPostModel, initialPost } from 'models/Post'
 import { Formik, Form, Field } from 'formik'
+import { firebase } from '../../firebase/app';
 
 type Params = {
   id: string
+}
+
+const update = async (id: string, values: Post) => {
+  try {
+    const post = await db.collection(postCollection).doc(id)
+    post.update({
+      'title': values.title,
+      'body': values.body,
+      'updated_at': firebase.firestore.FieldValue.serverTimestamp(),
+    })
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 const fetchPost = async(id: string) => {
@@ -31,11 +45,10 @@ const backToList = (history: H.History) => {
 
 export const Update: React.FC = () => {
   const [post, setPost] = React.useState<Post>(null)
+  const [initialValue, setInitialValue] = React.useState<Post>(initialPost)
   const [isPosting, setIsPosting] = React.useState(false)
   const history = useHistory()
   const params = useParams<Params>()
-
-  const initialValue = {title: '', body: ''}
 
   React.useEffect(() => {
     if (!params.id) {
@@ -48,7 +61,7 @@ export const Update: React.FC = () => {
         history.replace('/daily/list')
       }
       setPost(postDatas)
-      // setInitialValue(createPostModel(postDatas))
+      setInitialValue(createPostModel(postDatas))
     })()
     return () => {
       setPost(null)
@@ -67,13 +80,14 @@ export const Update: React.FC = () => {
           </header>
           <div className="body">
           <Formik
+            enableReinitialize
             initialValues={initialValue}
             onSubmit={(values, actions) => {
               actions.setSubmitting(false);
               setIsPosting(true)
-              // post(values)
+              update(params.id, values)
 
-              history.replace('/daily/list')
+              history.replace(`/daily/detail/${params.id}`)
             }}
             render={formikBag => (
               <Form>

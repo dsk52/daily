@@ -22,3 +22,9 @@ export const createPostModel = (data: json): Post => {
     updated_at: firebase.firestore.FieldValue.serverTimestamp(),
   }
 }
+
+export const initialPost: Post = {
+  id: '',
+  title: '',
+  body: ''
+}

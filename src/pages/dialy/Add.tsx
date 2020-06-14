@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useHistory, Link } from 'react-router-dom';
 import { db, postCollection } from 'firebase/app';
 import { Formik, Form, Field } from 'formik'
-import { Post, createPostModel } from 'models/Post';
+import { Post, createPostModel, initialPost } from 'models/Post';
 
 const post = async (values: Post) => {
   try {
@@ -15,7 +15,7 @@ const post = async (values: Post) => {
 
 const Add: React.FC = () => {
   const [isPosting, setIsPosting] = React.useState(false)
-  const initialValue: Post = { title: '', body: '' }
+  const initialValue: Post = initialPost
   const history = useHistory()
 
   return (
