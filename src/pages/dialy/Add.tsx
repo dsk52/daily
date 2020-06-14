@@ -14,6 +14,7 @@ const post = async (values: Post) => {
 }
 
 const Add: React.FC = () => {
+  const [isPosting, setIsPosting] = React.useState(false)
   const initialValue: Post = { title: '', body: '' }
   const history = useHistory()
 
@@ -26,6 +27,7 @@ const Add: React.FC = () => {
         initialValues={initialValue}
         onSubmit={(values, actions) => {
           actions.setSubmitting(false);
+          setIsPosting(true)
           post(values)
 
           history.replace('/daily/list')
@@ -53,7 +55,7 @@ const Add: React.FC = () => {
                 </div>
               )}
             />
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={isPosting}>Submit</button>
           </Form>
         )}
       />

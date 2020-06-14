@@ -14,7 +14,12 @@ const fetchPosts = async () => {
     const posts = []
     if (postSnapshot.empty) { return posts }
     postSnapshot.docs.map(doc => {
-      posts.push(doc.data())
+      if (!doc.exists) { return }
+
+      const data = doc.data()
+      data.id = doc.id
+
+      posts.push(data)
     })
 
     return posts
@@ -40,21 +45,27 @@ export const List: React.FC = () => {
 
   return (
     <div>
-      <h2>list</h2>
-      <Link to='/daily/add'>書く</Link>
-      <button onClick={() => signOut(history)}>Sign out</button>
+      <header>
+        <h1>一覧</h1>
+        <Link to='/daily/add'>書く</Link>
+      </header>
+      <div className="body">
+        <button onClick={() => signOut(history)}>Sign out</button>
 
-      <h2>一覧</h2>
-      <ul>
-        {posts.map((post, index) => (
-          <li key={index}>
-            <div>
-              <div className="title">{post.title}</div>
-              <div className="body">{post.body}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
+        <ul>
+          {posts.map((post: Post) => (
+            <li key={post.id}>
+              <div>
+                <div className="title">
+                  <Link to={`/daily/detail/${post.id}`}>
+                    {post.title}
+                  </Link>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
