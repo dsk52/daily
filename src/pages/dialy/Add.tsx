@@ -1,21 +1,12 @@
 import * as React from 'react'
 import { useHistory, Link } from 'react-router-dom';
 import { db, postCollection } from 'firebase/app';
-import { firebase } from '../../firebase/app';
 import { Formik, Form, Field } from 'formik'
-import { Post } from 'types/Post';
+import { Post, createPostModel } from 'models/Post';
 
-const post = async (values: Post, history) => {
+const post = async (values: Post) => {
   try {
-    await db.collection(postCollection).add({
-      'author_id': 1,
-      'title': values.title,
-      'body': values.body,
-      'created_at': firebase.firestore.FieldValue.serverTimestamp(),
-      'updated_at': firebase.firestore.FieldValue.serverTimestamp(),
-    })
-
-    history.replace('/daily/list')
+    await db.collection(postCollection).add(createPostModel(values))
 
   } catch (error) {
     console.error(error);
@@ -35,7 +26,9 @@ const Add: React.FC = () => {
         initialValues={initialValue}
         onSubmit={(values, actions) => {
           actions.setSubmitting(false);
-          post(values, history)
+          post(values)
+
+          history.replace('/daily/list')
         }}
         render={formikBag => (
           <Form>
@@ -43,7 +36,8 @@ const Add: React.FC = () => {
               name="title"
               render={({ field, form, meta }) => (
                 <div>
-                  <input type="text" {...field} />
+                  <label htmlFor="title">title</label>
+                  <input type="text" id="title" {...field} />
                   {meta.touched && meta.error && meta.error}
                 </div>
               )}
@@ -53,7 +47,8 @@ const Add: React.FC = () => {
               name="body"
               render={({ field, form, meta }) => (
                 <div>
-                  <textarea {...field} placeholder="" />
+                  <label htmlFor="body">body</label>
+                  <textarea {...field} id="body" placeholder="" />
                   {meta.touched && meta.error && meta.error}
                 </div>
               )}

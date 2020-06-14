@@ -2,6 +2,7 @@ import * as React from 'react'
 import { AuthContext } from 'providers/AuthProvider';
 import { useHistory, Link } from 'react-router-dom';
 import { postCollection, db } from 'firebase/app';
+import { Post } from 'models/Post';
 
 const fetchPosts = async () => {
   try {
@@ -23,7 +24,7 @@ const fetchPosts = async () => {
 }
 
 export const List: React.FC = () => {
-  const [posts, setPosts] = React.useState([])
+  const [posts, setPosts] = React.useState<Post[]>([])
   const { signOut } = React.useContext(AuthContext);
   const history = useHistory()
 
