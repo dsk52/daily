@@ -24,12 +24,38 @@ const fetchPost = async(id: string) => {
   }
 }
 
+const deletePost = async(id: string) => {
+  try {
+    const postSnapshot = await db.collection(postCollection)
+      .doc(id)
+      .get()
+
+    if (!postSnapshot.exists) { return }
+
+    // TODO 自分の投稿か確認を追加
+
+    await db.collection(postCollection)
+      .doc(id)
+      .delete()
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const backToList = (history: H.History) => {
   history.push('/daily/list')
 }
 
 const update = (id: string, history: H.History) => {
   history.push(`/daily/update/${id}`)
+}
+
+const del = (id: string, history: H.History) => {
+  (async () => {
+    await deletePost(id)
+    backToList(history)
+  })()
 }
 
 export const Detail: React.FC = () => {
@@ -61,6 +87,7 @@ export const Detail: React.FC = () => {
           <div>
             <button type="button" onClick={() => backToList(history)}>一覧に戻る</button>
             <button type="button" onClick={() => update(params.id, history)}>編集</button>
+            <button type="button" onClick={() => del(params.id, history)}>削除</button>
           </div>
           <header>
             <h1>{post.title}</h1>
