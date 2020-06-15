@@ -30,10 +30,12 @@ const fetchPosts = async () => {
 
 export const List: React.FC = () => {
   const [posts, setPosts] = React.useState<Post[]>([])
-  const { signOut } = React.useContext(AuthContext);
+  const { user, signOut } = React.useContext(AuthContext);
   const history = useHistory()
 
   React.useEffect(() => {
+    console.log('user', user);
+
     (async () => {
       const postDatas = await fetchPosts()
       setPosts(postDatas)
