@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { postCollection, db } from 'firebase/app';
-import { Post, createPostModel } from 'models/Post';
 import { useHistory, useParams } from 'react-router-dom';
+import { postCollection, db } from '../../firebase/apps';
+import { Post, createPostModel } from '../../models/Post';
 import * as H from 'history'
 
 type Params = {

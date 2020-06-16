@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as H from 'history'
-import { db, postCollection } from 'firebase/app'
-import { Post, createPostModel, initialPost } from 'models/Post'
+import { firebase, db, postCollection } from '../../firebase/apps'
+import { Post, createPostModel, initialPost } from '../../models/Post'
 import { Formik, Form, Field } from 'formik'
-import { firebase } from '../../firebase/app';
 
 type Params = {
   id: string

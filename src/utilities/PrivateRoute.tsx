@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { AuthContext } from "providers/AuthProvider";
+
+import { AuthContext } from "../providers/AuthProvider";
 import { Index } from "../pages/Index";
 
 // eslint-disable-next-line react/prop-types

@@ -71,7 +71,7 @@ module.exports = {
     modules: [path.resolve(__dirname, './src'), 'node_modules']
   },
 
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
 
   devServer: {
     contentBase: path.join(__dirname, 'build'),
