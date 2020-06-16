@@ -39,10 +39,15 @@ export const AuthProvider: React.FC = ({ children }: AuthProviderProp) => {
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
+      console.log('user on auth state change', user);
+
       if (user == undefined) return
 
       setUser(user)
     })
+    return () => {
+      console.log('unmount');
+    }
   }, [])
 
   return (

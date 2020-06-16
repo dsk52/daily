@@ -13,16 +13,15 @@ import { Update } from '../pages/daily/Update'
 export const AppRouter: React.FC = () => (
   <Router>
     <Switch>
-      <Route path='/daily/add' component={Add} />
-      <Route path='/daily/update/:id' component={Update} />
-      <Route path='/daily/detail/:id' component={Detail} />
-      <Route path='/daily/list' component={List} />
-      <Redirect path='/daily' to="/daily/list" />
       <AuthProvider>
-        {/* <PrivateRoute path='/daily/list' component={List} />
-        <Redirect path='/daily' to="/daily/list" /> */}
-        <Route exact={true} path={['/', '']}  component={Index}/>
+        <PrivateRoute path='/daily/add' component={Add} />
+        <PrivateRoute path='/daily/update/:id' component={Update} />
+        <PrivateRoute path='/daily/detail/:id' component={Detail} />
+        {/* <Route path='/daily/list' component={List} /> */}
+        <PrivateRoute path='/dialy/list' component={List} />
+        <Redirect path='/dialy' to="/dialy/list" />
       </AuthProvider>
+      <Route exact={true} path={['/', '']}  component={Index}/>
       <Route path="*" component={NotFound} />
     </Switch>
   </Router>
