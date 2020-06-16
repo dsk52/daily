@@ -1,4 +1,4 @@
-import { firebase } from '../firebase/app'
+import { firebase } from '../firebase/apps'
 
 export type Post = {
   id?: string;

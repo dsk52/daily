@@ -2,6 +2,9 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended"
   ],
@@ -16,6 +19,7 @@
     }
   },
   "plugins": [
+    "import",
     "react",
     "react-hooks",
     "@typescript-eslint"

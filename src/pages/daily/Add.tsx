@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useHistory, Link } from 'react-router-dom';
-import { db, postCollection } from 'firebase/app';
+import { db, postCollection } from '../../firebase/apps';
 import { Formik, Form, Field } from 'formik'
-import { Post, createPostModel, initialPost } from 'models/Post';
+import { Post, createPostModel, initialPost } from '../../models/Post';
 
 const post = async (values: Post) => {
   try {

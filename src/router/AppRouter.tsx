@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import PrivateRoute from 'utilities/PrivateRoute';
-import { AuthProvider } from 'providers/AuthProvider';
+// import PrivateRoute from 'utilities/PrivateRoute';
+import { AuthProvider } from '../providers/AuthProvider';
 import { NotFound } from '../pages/NotFound';
-import {Index} from '../pages/Index';
+import { Index } from '../pages/Index';
 import { List } from '../pages/daily/List'
 import { Add } from '../pages/daily/Add'
 import { Detail } from '../pages/daily/Detail';

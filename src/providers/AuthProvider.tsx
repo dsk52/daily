@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { firebase, providerTwitter } from '../firebase/app';
+import { firebase, providerTwitter } from '../firebase/apps';
 import * as H from 'history'
 
 const context = {

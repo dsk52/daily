@@ -40,11 +40,6 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.ts(x?)$/,
-        loader: 'source-map-loader'
-      },
-      {
-        enforce: 'pre',
-        test: /\.ts(x?)$/,
         loader: 'eslint-loader',
         options: {
           fix: true,
@@ -69,6 +64,8 @@ module.exports = {
     minimize: true,
     minimizer: [new TerserPlugin()],
   },
+
+  devtool: 'source-map',
 
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],

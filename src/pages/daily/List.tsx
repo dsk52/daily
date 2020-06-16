@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { AuthContext } from 'providers/AuthProvider';
+import { AuthContext } from '../../providers/AuthProvider';
 import { useHistory, Link } from 'react-router-dom';
-import { postCollection, db } from 'firebase/app';
-import { Post } from 'models/Post';
+import { postCollection, db } from '../../firebase/apps';
+import { Post } from '../../models/Post';
 
 const fetchPosts = async () => {
   try {
