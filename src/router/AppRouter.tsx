@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
+import IndexRoute from '../utilities/IndexRoute';
 import PrivateRoute from '../utilities/PrivateRoute';
 import { AuthProvider } from '../providers/AuthProvider';
 import { NotFound } from '../pages/NotFound';
@@ -13,8 +14,8 @@ import { Update } from '../pages/daily/Update'
 export const AppRouter: React.FC = () => (
   <Router>
     <Switch>
-      <Route exact={true} path={['', '/']}  component={Index}/>
       <AuthProvider>
+        <IndexRoute exact path={['', '/']}  component={Index}/>
         <PrivateRoute path='/daily/add' component={Add} />
         <PrivateRoute path='/daily/update/:id' component={Update} />
         <PrivateRoute path='/daily/detail/:id' component={Detail} />
