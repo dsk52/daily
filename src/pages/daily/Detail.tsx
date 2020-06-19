@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { postCollection, db } from '../../firebase/apps';
 import { Post, createPostModel } from '../../models/Post';
 import * as H from 'history'
+import { Container } from '../../components/container';
 
 type Params = {
   id: string
@@ -81,22 +82,22 @@ export const Detail: React.FC = () => {
   }, [])
 
   return (
-    <div>
+    <Container>
       {post != null ? (
         <>
           <div>
-            <button type="button" onClick={() => backToList(history)}>一覧に戻る</button>
+            <button type="button" onClick={() => backToList(history)}>一覧へ</button>
             <button type="button" onClick={() => update(params.id, history)}>編集</button>
             <button type="button" onClick={() => del(params.id, history)}>削除</button>
           </div>
           <header>
             <h1>{post.title}</h1>
           </header>
-          <div className="body">
+          <div className="body" style={{ whiteSpace: 'pre-wrap' }}>
             {post.body}
           </div>
         </>
       ) : null}
-    </div>
+    </Container>
   )
 }

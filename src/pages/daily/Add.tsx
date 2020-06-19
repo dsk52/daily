@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { db, postCollection } from '../../firebase/apps';
 import { Formik, Form, Field } from 'formik'
 import { Post, createPostModel, initialPost } from '../../models/Post';
+import { Container } from '../../components/container';
 
 const post = async (values: Post) => {
   try {
@@ -19,7 +20,7 @@ const Add: React.FC = () => {
   const history = useHistory()
 
   return (
-    <div>
+    <Container>
       <h2>Add</h2>
       <Link to='/daily/list'>トップへ</Link>
 
@@ -59,7 +60,7 @@ const Add: React.FC = () => {
           </Form>
         )}
       />
-    </div>
+    </Container>
   )
 }
 

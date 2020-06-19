@@ -4,6 +4,7 @@ import * as H from 'history'
 import { firebase, db, postCollection } from '../../firebase/apps'
 import { Post, createPostModel, initialPost } from '../../models/Post'
 import { Formik, Form, Field } from 'formik'
+import { Container } from '../../components/container'
 
 type Params = {
   id: string
@@ -38,8 +39,8 @@ const fetchPost = async(id: string) => {
   }
 }
 
-const backToList = (history: H.History) => {
-  history.push('/daily/list')
+const backToDetail = (id: string, history: H.History) => {
+  history.push(`/daily/detail/${id}`)
 }
 
 export const Update: React.FC = () => {
@@ -68,11 +69,11 @@ export const Update: React.FC = () => {
   }, [])
 
   return (
-    <div>
+    <Container>
       {post != null ? (
         <>
           <div>
-            <button type="button" onClick={() => backToList(history)}>一覧に戻る</button>
+            <button type="button" onClick={() => backToDetail(params.id, history)}>戻る</button>
           </div>
           <header>
             <h1>{post.title} の編集</h1>
@@ -118,6 +119,6 @@ export const Update: React.FC = () => {
           </div>
         </>
       ) : null}
-    </div>
+    </Container>
   )
 }
