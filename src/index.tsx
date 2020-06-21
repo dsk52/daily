@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import { AppRouter } from 'router/AppRouter';
+import { AppRouter } from './router/AppRouter';
 
-import 'sanitize.css';
+import './index.css';
 
 
 ReactDOM.render(

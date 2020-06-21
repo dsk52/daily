@@ -23,7 +23,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "typeRoots": ["src/types", "node_modules/@types"]
+    "typeRoots": ["src/models", "node_modules/@types"]
   },
   "include": [
     "src/**/*.ts",

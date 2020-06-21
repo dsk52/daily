@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 const MODE = 'development';
@@ -23,18 +24,22 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader'
+            loader: 'ts-loader',
+            options: { transpileOnly: true }
           }
         ]
       },
       {
         test: /\.css/,
         use: [
-          "style-loader",
           {
-            loader: "css-loader",
-            options: { url: false }
-          }
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: path.resolve(__dirname, 'build'),
+            }
+          },
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          { loader: "postcss-loader" }
         ]
       },
       {
@@ -48,16 +53,21 @@ module.exports = {
         loader: 'eslint-loader',
         options: {
           fix: true,
-          cache: true,
+          cache: false,
         },
       }
     ]
   },
 
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      eslint: true
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
@@ -71,10 +81,15 @@ module.exports = {
     modules: [path.resolve(__dirname, './src'), 'node_modules']
   },
 
+  devtool: 'source-map',
+
   devServer: {
     contentBase: path.join(__dirname, 'build'),
-    compress: true,
+    clientLogLevel: 'warning',
+    watchContentBase: true,
+    compress: false,
+    hot: true,
     port: 9000,
-    historyApiFallback: true
+    historyApiFallback: true,
   }
 }

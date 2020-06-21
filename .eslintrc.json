@@ -1,6 +1,10 @@
 {
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended"
   ],
@@ -15,9 +19,16 @@
     }
   },
   "plugins": [
-    "@typescript-eslint",
-    "react"
+    "import",
+    "react",
+    "react-hooks",
+    "@typescript-eslint"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["off"]
