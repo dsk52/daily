@@ -79,43 +79,42 @@ export const Update: React.FC = () => {
             <h1>{post.title} の編集</h1>
           </header>
           <div className="body">
-          <Formik
-            enableReinitialize
-            initialValues={initialValue}
-            onSubmit={(values, actions) => {
-              actions.setSubmitting(false);
-              setIsPosting(true)
-              update(params.id, values)
+            <Formik
+              enableReinitialize
+              initialValues={initialValue}
+              onSubmit={(values, actions) => {
+                actions.setSubmitting(false);
+                setIsPosting(true)
+                update(params.id, values)
 
-              history.replace(`/daily/detail/${params.id}`)
-            }}
-            render={formikBag => (
+                history.replace(`/daily/detail/${params.id}`)
+              }}
+          >
+            {(formikBag) => (
               <Form>
-                <Field
-                  name="title"
-                  render={({ field, form, meta }) => (
+                <Field name="title">
+                  {({field, form, meta}) => (
                     <div>
                       <label htmlFor="title">title</label>
                       <input type="text" id="title" {...field} />
                       {meta.touched && meta.error && meta.error}
                     </div>
                   )}
-                />
+                </Field>
 
-                <Field
-                  name="body"
-                  render={({ field, form, meta }) => (
+                <Field name="body" >
+                  {({field, form, meta}) => (
                     <div>
                       <label htmlFor="body">body</label>
                       <textarea {...field} id="body" placeholder="" />
                       {meta.touched && meta.error && meta.error}
                     </div>
                   )}
-                />
+                </Field>
                 <button type="submit" disabled={isPosting}>Submit</button>
               </Form>
             )}
-          />
+            </Formik>
           </div>
         </>
       ) : null}

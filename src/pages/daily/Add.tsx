@@ -33,33 +33,32 @@ const Add: React.FC = () => {
 
           history.replace('/daily/list')
         }}
-        render={formikBag => (
-          <Form>
-            <Field
-              name="title"
-              render={({ field, form, meta }) => (
-                <div>
-                  <label htmlFor="title">title</label>
-                  <input type="text" id="title" {...field} />
-                  {meta.touched && meta.error && meta.error}
-                </div>
-              )}
-            />
+      >
+        {(formikBag) => (
+        <Form>
+          <Field name="title">
+            {({field, form, meta}) => (
+              <div>
+                <label htmlFor="title">title</label>
+                <input type="text" id="title" {...field} />
+                {meta.touched && meta.error && meta.error}
+              </div>
+            )}
+          </Field>
 
-            <Field
-              name="body"
-              render={({ field, form, meta }) => (
-                <div>
-                  <label htmlFor="body">body</label>
-                  <textarea {...field} id="body" placeholder="" />
-                  {meta.touched && meta.error && meta.error}
-                </div>
-              )}
-            />
-            <button type="submit" disabled={isPosting}>Submit</button>
-          </Form>
+          <Field name="body" >
+            {({field, form, meta}) => (
+              <div>
+                <label htmlFor="body">body</label>
+                <textarea {...field} id="body" placeholder="" />
+                {meta.touched && meta.error && meta.error}
+              </div>
+            )}
+          </Field>
+          <button type="submit" disabled={isPosting}>Submit</button>
+        </Form>
         )}
-      />
+      </Formik>
     </Container>
   )
 }
