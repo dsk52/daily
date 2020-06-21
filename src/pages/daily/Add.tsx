@@ -16,8 +16,12 @@ const post = async (values: Post) => {
 
 const Add: React.FC = () => {
   const [isPosting, setIsPosting] = React.useState(false)
-  const initialValue: Post = initialPost
   const history = useHistory()
+
+  const initialValue: Post = initialPost
+  const today = new Date()
+  const dateFormat = `${today.getFullYear()}.${today.getMonth()}.${today.getDate()}`
+  initialPost.title = dateFormat
 
   return (
     <Container>
