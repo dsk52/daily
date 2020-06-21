@@ -24,7 +24,8 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader'
+            loader: 'ts-loader',
+            options: { transpileOnly: true }
           }
         ]
       },
@@ -59,7 +60,9 @@ module.exports = {
   },
 
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      eslint: true
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
@@ -82,6 +85,7 @@ module.exports = {
 
   devServer: {
     contentBase: path.join(__dirname, 'build'),
+    clientLogLevel: 'warning',
     watchContentBase: true,
     compress: false,
     hot: true,
