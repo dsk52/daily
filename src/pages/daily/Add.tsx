@@ -25,44 +25,49 @@ const Add: React.FC = () => {
 
   return (
     <Container>
-      <h2>Add</h2>
-      <Link to='/daily/list'>トップへ</Link>
+      <header>
+        <Link className="bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" to='/daily/list'>一覧へ</Link>
 
-      <Formik
-        initialValues={initialValue}
-        onSubmit={(values, actions) => {
-          actions.setSubmitting(false);
-          setIsPosting(true)
-          post(values)
+        <h1>新規作成</h1>
+      </header>
 
-          history.replace('/daily/list')
-        }}
-      >
-        {(formikBag) => (
-        <Form>
-          <Field name="title">
-            {({field, form, meta}) => (
-              <div>
-                <label htmlFor="title">title</label>
-                <input type="text" id="title" {...field} />
-                {meta.touched && meta.error && meta.error}
-              </div>
-            )}
-          </Field>
+      <div className="body">
+        <Formik
+          initialValues={initialValue}
+          onSubmit={(values, actions) => {
+            actions.setSubmitting(false);
+            setIsPosting(true)
+            post(values)
 
-          <Field name="body" >
-            {({field, form, meta}) => (
-              <div>
-                <label htmlFor="body">body</label>
-                <textarea {...field} id="body" placeholder="" />
-                {meta.touched && meta.error && meta.error}
-              </div>
-            )}
-          </Field>
-          <button type="submit" disabled={isPosting}>Submit</button>
-        </Form>
-        )}
-      </Formik>
+            history.replace('/daily/list')
+          }}
+        >
+          {(formikBag) => (
+          <Form>
+            <Field name="title">
+              {({field, form, meta}) => (
+                <div>
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">タイトル</label>
+                  <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" {...field} />
+                  {meta.touched && meta.error && meta.error}
+                </div>
+              )}
+            </Field>
+
+            <Field name="body" >
+              {({field, form, meta}) => (
+                <div>
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="body">内容</label>
+                  <textarea className="resize-y shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" {...field} id="body" placeholder="" />
+                  {meta.touched && meta.error && meta.error}
+                </div>
+              )}
+            </Field>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={isPosting}>作成</button>
+          </Form>
+          )}
+        </Formik>
+      </div>
     </Container>
   )
 }

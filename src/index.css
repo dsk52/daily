@@ -1,6 +1,40 @@
 /* purgecss start ignore */
 @tailwind  base;
+
+body {
+  line-height: 1.5;
+  font-family: -apple-system, "Roboto", "Helvetica Neue", "Droid Sans", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "Meiryo", "メイリオ", "Osaka", "MS PGothic", arial, sans-serif;
+  font-size: 16px;
+  color: #3c3c3c;
+}
+
+h1 {
+  @apply text-2xl;
+}
+h2 {
+  @apply text-xl;
+}
+h3 {
+  @apply text-lg;
+}
+a {
+  @apply text-blue-600 underline;
+}
+
+ul {
+  list-style-type: disc;
+}
+
 @tailwind  components;
 /* purgecss end ignore */
 
 @tailwind utilities;
+
+
+.body {
+  margin-top: 2rem;
+}
+
+.post-list {
+  list-style-type: none;
+}

@@ -49,14 +49,21 @@ export const List: React.FC = () => {
   return (
     <Container>
       <header>
-        <h1>一覧</h1>
-        <Link to='/daily/add'>書く</Link>
+        <div className="flex flex-wrap justify-between">
+          <div className="w-2/5">
+            <h1>一覧</h1>
+          </div>
+
+          <div className="w-2/5 text-right">
+            <Link className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" to='/daily/add'>書く</Link>
+            <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => signOut(history)}>ログアウト</button>
+          </div>
+        </div>
       </header>
       <div className="body">
-        <button onClick={() => signOut(history)}>Sign out</button>
-        <ul>
+        <ul className="post-list space-y-3">
           {posts.map((post: Post) => (
-            <li key={post.id}>
+            <li className="shadow px-5 py-4" key={post.id}>
               <div>
                 <div className="title">
                   <Link to={`/daily/detail/${post.id}`}>

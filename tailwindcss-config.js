@@ -4,6 +4,9 @@ module.exports = {
       tablet: '768px',
       desktop: '1024px',
     },
+    container: {
+      center: true,
+    },
   },
   variants: {
     opacity: ['responsive', 'hover']

@@ -10,7 +10,7 @@ export const Index: React.FC = () => {
   return (
     <Container>
       <h2>Index</h2>
-      <button onClick={() => loginWithTwitter(history)}>Twitter Login</button>
+      <button className="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => loginWithTwitter(history)}>Twitter Login</button>
     </Container>
   )
 }
