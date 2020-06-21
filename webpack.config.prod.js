@@ -72,7 +72,7 @@ module.exports = {
     minimizer: [new TerserPlugin()],
   },
 
-  devtool: 'source-map',
+  devtool: 'false',
 
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
