@@ -97,7 +97,7 @@ export const Update: React.FC = () => {
                   {({field, form, meta}) => (
                     <div>
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">title</label>
-                      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" {...field} />
+                      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" required {...field} />
                       {meta.touched && meta.error && meta.error}
                     </div>
                   )}
@@ -107,7 +107,7 @@ export const Update: React.FC = () => {
                   {({field, form, meta}) => (
                     <div>
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="body">body</label>
-                      <textarea className="resize-y shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...field} id="body" placeholder="" />
+                      <textarea className="resize-y shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="body" required rows="10" {...field} placeholder="" />
                       {meta.touched && meta.error && meta.error}
                     </div>
                   )}

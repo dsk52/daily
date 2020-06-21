@@ -20,7 +20,7 @@ const Add: React.FC = () => {
 
   const initialValue: Post = initialPost
   const today = new Date()
-  const dateFormat = `${today.getFullYear()}.${today.getMonth()}.${today.getDate()}`
+  const dateFormat = `${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}`
   initialPost.title = dateFormat
 
   return (
@@ -48,7 +48,7 @@ const Add: React.FC = () => {
               {({field, form, meta}) => (
                 <div>
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">タイトル</label>
-                  <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" {...field} />
+                  <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" required {...field} />
                   {meta.touched && meta.error && meta.error}
                 </div>
               )}
@@ -58,7 +58,7 @@ const Add: React.FC = () => {
               {({field, form, meta}) => (
                 <div>
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="body">内容</label>
-                  <textarea className="resize-y shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" {...field} id="body" placeholder="" />
+                  <textarea className="resize-y shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="body" required rows="10" {...field} placeholder="" />
                   {meta.touched && meta.error && meta.error}
                 </div>
               )}
