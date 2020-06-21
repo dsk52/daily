@@ -11,7 +11,7 @@ const IndexRoute = ({ component: RouteComponent, ...options }) => {
       {...options}
       render={(props) => {
         if (user) {
-          return <Redirect to="/dialy/list" />
+          return <Redirect to="/daily/list" />
         } else {
           if (isChecking) {
             return <div>loading...</div>

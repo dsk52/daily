@@ -16,11 +16,11 @@ export const AppRouter: React.FC = () => (
     <Switch>
       <AuthProvider>
         <IndexRoute exact path={['', '/']}  component={Index}/>
+        <Redirect path='/daily' to="/daily/list" />
+        <PrivateRoute path='/daily/list' component={List} />
         <PrivateRoute path='/daily/add' component={Add} />
         <PrivateRoute path='/daily/update/:id' component={Update} />
         <PrivateRoute path='/daily/detail/:id' component={Detail} />
-        <PrivateRoute path='/dialy/list' component={List} />
-        <Redirect path='/dialy' to="/dialy/list" />
       </AuthProvider>
       <Route path="*" component={NotFound} />
     </Switch>
