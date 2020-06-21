@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { postCollection, db } from '../../firebase/apps';
 import { Post, createPostModel } from '../../models/Post';
 import * as H from 'history'
@@ -85,16 +85,22 @@ export const Detail: React.FC = () => {
     <Container>
       {post != null ? (
         <>
-          <div>
-            <button type="button" onClick={() => backToList(history)}>一覧へ</button>
-            <button type="button" onClick={() => update(params.id, history)}>編集</button>
-            <button type="button" onClick={() => del(params.id, history)}>削除</button>
-          </div>
           <header>
+            <div className="flex flex-wrap justify-between">
+              <div className="w-2/5">
+                <button className="bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => backToList(history)}>一覧へ</button>
+              </div>
+              <div className="w-2/5 text-right">
+                <button className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => update(params.id, history)}>編集</button>
+                <button className="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => del(params.id, history)}>削除</button>
+              </div>
+            </div>
             <h1>{post.title}</h1>
           </header>
-          <div className="body" style={{ whiteSpace: 'pre-wrap' }}>
-            {post.body}
+          <div className="body">
+            <div className="whitespace-pre-wrap">
+              {post.body}
+            </div>
           </div>
         </>
       ) : null}

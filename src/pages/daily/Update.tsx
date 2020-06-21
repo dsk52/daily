@@ -72,12 +72,13 @@ export const Update: React.FC = () => {
     <Container>
       {post != null ? (
         <>
-          <div>
-            <button type="button" onClick={() => backToDetail(params.id, history)}>戻る</button>
-          </div>
           <header>
+            <div>
+              <button className="bg-grey-300 hover:bg-grey-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => backToDetail(params.id, history)}>戻る</button>
+            </div>
             <h1>{post.title} の編集</h1>
           </header>
+
           <div className="body">
             <Formik
               enableReinitialize
@@ -95,8 +96,8 @@ export const Update: React.FC = () => {
                 <Field name="title">
                   {({field, form, meta}) => (
                     <div>
-                      <label htmlFor="title">title</label>
-                      <input type="text" id="title" {...field} />
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">title</label>
+                      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" required {...field} />
                       {meta.touched && meta.error && meta.error}
                     </div>
                   )}
@@ -105,13 +106,13 @@ export const Update: React.FC = () => {
                 <Field name="body" >
                   {({field, form, meta}) => (
                     <div>
-                      <label htmlFor="body">body</label>
-                      <textarea {...field} id="body" placeholder="" />
+                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="body">body</label>
+                      <textarea className="resize-y shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="body" required rows="10" {...field} placeholder="" />
                       {meta.touched && meta.error && meta.error}
                     </div>
                   )}
                 </Field>
-                <button type="submit" disabled={isPosting}>Submit</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={isPosting}>Submit</button>
               </Form>
             )}
             </Formik>

@@ -5,7 +5,7 @@ type Props = {
 }
 
 export const Container: React.FC = ({ children }: Props) => (
-  <div style={{width: '90%', margin: '0 auto'}}>
+  <div className="container">
     {children}
   </div>
 )
