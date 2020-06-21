@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-// import PrivateRoute from 'utilities/PrivateRoute';
+import IndexRoute from '../utilities/IndexRoute';
+import PrivateRoute from '../utilities/PrivateRoute';
 import { AuthProvider } from '../providers/AuthProvider';
 import { NotFound } from '../pages/NotFound';
 import { Index } from '../pages/Index';
@@ -13,15 +14,13 @@ import { Update } from '../pages/daily/Update'
 export const AppRouter: React.FC = () => (
   <Router>
     <Switch>
-      <Route path='/daily/add' component={Add} />
-      <Route path='/daily/update/:id' component={Update} />
-      <Route path='/daily/detail/:id' component={Detail} />
-      <Route path='/daily/list' component={List} />
-      <Redirect path='/daily' to="/daily/list" />
       <AuthProvider>
-        {/* <PrivateRoute path='/daily/list' component={List} />
-        <Redirect path='/daily' to="/daily/list" /> */}
-        <Route exact={true} path={['/', '']}  component={Index}/>
+        <IndexRoute exact path={['', '/']}  component={Index}/>
+        <Redirect path='/daily' to="/daily/list" />
+        <PrivateRoute path='/daily/list' component={List} />
+        <PrivateRoute path='/daily/add' component={Add} />
+        <PrivateRoute path='/daily/update/:id' component={Update} />
+        <PrivateRoute path='/daily/detail/:id' component={Detail} />
       </AuthProvider>
       <Route path="*" component={NotFound} />
     </Switch>

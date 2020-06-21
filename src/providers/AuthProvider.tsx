@@ -4,6 +4,7 @@ import * as H from 'history'
 
 const context = {
   user: null,
+  isChecking: false,
   loginWithTwitter: null,
   signOut: null
 }
@@ -36,21 +37,27 @@ const signOut = async (history: H.History) => {
 
 export const AuthProvider: React.FC = ({ children }: AuthProviderProp) => {
   const [user, setUser] = React.useState<firebase.User>()
+  const [isChecking, setIsChecking] = React.useState(true)
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user == undefined) return
+      if (user == undefined) { return }
 
       setUser(user)
     })
+    setIsChecking(false)
+    return () => {
+      console.log('unmount');
+    }
   }, [])
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        isChecking,
         loginWithTwitter,
-        signOut
+        signOut,
       }}
     >
       {children}

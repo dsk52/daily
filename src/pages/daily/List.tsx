@@ -3,6 +3,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { useHistory, Link } from 'react-router-dom';
 import { postCollection, db } from '../../firebase/apps';
 import { Post } from '../../models/Post';
+import { Container } from '../../components/container';
 
 const fetchPosts = async () => {
   try {
@@ -34,26 +35,25 @@ export const List: React.FC = () => {
   const history = useHistory()
 
   React.useEffect(() => {
-    console.log('user', user);
+    console.log('list');
 
     (async () => {
       const postDatas = await fetchPosts()
       setPosts(postDatas)
     })()
     return () => {
-      console.log('unmount');
+      setPosts([]);
     }
   }, [])
 
   return (
-    <div>
+    <Container>
       <header>
         <h1>一覧</h1>
         <Link to='/daily/add'>書く</Link>
       </header>
       <div className="body">
         <button onClick={() => signOut(history)}>Sign out</button>
-
         <ul>
           {posts.map((post: Post) => (
             <li key={post.id}>
@@ -68,6 +68,6 @@ export const List: React.FC = () => {
           ))}
         </ul>
       </div>
-    </div>
+    </Container>
   )
 }
