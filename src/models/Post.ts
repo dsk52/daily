@@ -1,7 +1,7 @@
 import { firebase } from '../firebase/apps'
 
 export type Post = {
-  id?: string;
+  author_id?: string;
   title: string;
   body: string;
   created_at?: firebase.firestore.FieldValue;
@@ -15,7 +15,7 @@ type json = {
 
 export const createPostModel = (data: json): Post => {
   return {
-    id: data.id,
+    author_id: data.author_id,
     title: data.title,
     body: data.body,
     created_at: firebase.firestore.FieldValue.serverTimestamp(),
@@ -24,7 +24,6 @@ export const createPostModel = (data: json): Post => {
 }
 
 export const initialPost: Post = {
-  id: '',
   title: '',
   body: ''
 }

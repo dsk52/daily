@@ -4,6 +4,7 @@ import { db, postCollection } from '../../firebase/apps';
 import { Formik, Form, Field } from 'formik'
 import { Post, createPostModel, initialPost } from '../../models/Post';
 import { Container } from '../../components/container';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const post = async (values: Post) => {
   try {
@@ -15,6 +16,7 @@ const post = async (values: Post) => {
 }
 
 const Add: React.FC = () => {
+  const { user } = React.useContext(AuthContext);
   const [isPosting, setIsPosting] = React.useState(false)
   const history = useHistory()
 
@@ -37,6 +39,8 @@ const Add: React.FC = () => {
           onSubmit={(values, actions) => {
             actions.setSubmitting(false);
             setIsPosting(true)
+
+            values.author_id = user.uid
             post(values)
 
             history.replace('/daily/list')

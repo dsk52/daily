@@ -5,6 +5,7 @@ import { firebase, db, postCollection } from '../../firebase/apps'
 import { Post, createPostModel, initialPost } from '../../models/Post'
 import { Formik, Form, Field } from 'formik'
 import { Container } from '../../components/container'
+import { AuthContext } from '../../providers/AuthProvider'
 
 type Params = {
   id: string
@@ -44,6 +45,7 @@ const backToDetail = (id: string, history: H.History) => {
 }
 
 export const Update: React.FC = () => {
+  const { user } = React.useContext(AuthContext)
   const [post, setPost] = React.useState<Post>(null)
   const [initialValue, setInitialValue] = React.useState<Post>(initialPost)
   const [isPosting, setIsPosting] = React.useState(false)
@@ -84,8 +86,10 @@ export const Update: React.FC = () => {
               enableReinitialize
               initialValues={initialValue}
               onSubmit={(values, actions) => {
-                actions.setSubmitting(false);
+                actions.setSubmitting(false)
                 setIsPosting(true)
+
+                values.author_id = user.uid
                 update(params.id, values)
 
                 history.replace(`/daily/detail/${params.id}`)
