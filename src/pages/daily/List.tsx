@@ -5,9 +5,10 @@ import { postCollection, db } from '../../firebase/apps';
 import { Post } from '../../models/Post';
 import { Container } from '../../components/container';
 
-const fetchPosts = async () => {
+const fetchPosts = async (user) => {
   try {
     const postSnapshot = await db.collection(postCollection)
+      .where('author_id', "==", user.uid)
       .orderBy('created_at', 'desc')
       .limit(30)
       .get()
@@ -35,10 +36,8 @@ export const List: React.FC = () => {
   const history = useHistory()
 
   React.useEffect(() => {
-    console.log('list');
-
     (async () => {
-      const postDatas = await fetchPosts()
+      const postDatas = await fetchPosts(user)
       setPosts(postDatas)
     })()
     return () => {
