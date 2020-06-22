@@ -8,7 +8,11 @@ import { AuthContext } from '../../providers/AuthProvider';
 
 const post = async (values: Post) => {
   try {
-    await db.collection(postCollection).add(createPostModel(values))
+    const postRef = db.collection(postCollection)
+    const docId = postRef.doc().id
+    values.id = docId
+    await postRef.doc(docId).set(createPostModel(values))
+
 
   } catch (error) {
     console.error(error);

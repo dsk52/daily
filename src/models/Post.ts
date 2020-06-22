@@ -34,6 +34,7 @@ export const updatePostModel = (data: json): Post => {
 }
 
 export const initialPost: Post = {
+  id: '',
   title: '',
   body: ''
 }
