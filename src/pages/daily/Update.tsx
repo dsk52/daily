@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as H from 'history'
 import { firebase, db, postCollection } from '../../firebase/apps'
-import { Post, createPostModel, initialPost } from '../../models/Post'
+import { Post, createPostModel, initialPost, updatePostModel } from '../../models/Post'
 import { Formik, Form, Field } from 'formik'
 import { Container } from '../../components/container'
 import { AuthContext } from '../../providers/AuthProvider'
@@ -14,11 +14,7 @@ type Params = {
 const update = async (id: string, values: Post) => {
   try {
     const post = await db.collection(postCollection).doc(id)
-    post.update({
-      'title': values.title,
-      'body': values.body,
-      'updated_at': firebase.firestore.FieldValue.serverTimestamp(),
-    })
+    post.update(updatePostModel(values))
   } catch (error) {
     console.error(error);
   }
