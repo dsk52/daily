@@ -2,9 +2,10 @@ import * as React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as H from 'history'
 import { firebase, db, postCollection } from '../../firebase/apps'
-import { Post, createPostModel, initialPost } from '../../models/Post'
+import { Post, createPostModel, initialPost, updatePostModel } from '../../models/Post'
 import { Formik, Form, Field } from 'formik'
 import { Container } from '../../components/container'
+import { AuthContext } from '../../providers/AuthProvider'
 
 type Params = {
   id: string
@@ -13,11 +14,7 @@ type Params = {
 const update = async (id: string, values: Post) => {
   try {
     const post = await db.collection(postCollection).doc(id)
-    post.update({
-      'title': values.title,
-      'body': values.body,
-      'updated_at': firebase.firestore.FieldValue.serverTimestamp(),
-    })
+    post.update(updatePostModel(values))
   } catch (error) {
     console.error(error);
   }
@@ -44,6 +41,7 @@ const backToDetail = (id: string, history: H.History) => {
 }
 
 export const Update: React.FC = () => {
+  const { user } = React.useContext(AuthContext)
   const [post, setPost] = React.useState<Post>(null)
   const [initialValue, setInitialValue] = React.useState<Post>(initialPost)
   const [isPosting, setIsPosting] = React.useState(false)
@@ -84,8 +82,10 @@ export const Update: React.FC = () => {
               enableReinitialize
               initialValues={initialValue}
               onSubmit={(values, actions) => {
-                actions.setSubmitting(false);
+                actions.setSubmitting(false)
                 setIsPosting(true)
+
+                values.author_id = user.uid
                 update(params.id, values)
 
                 history.replace(`/daily/detail/${params.id}`)
