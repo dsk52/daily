@@ -8,7 +8,10 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "*.config.js",
+      "webpack.*.js",
+      "tsconfig.json"
     ],
     "rewrites": [
       {
