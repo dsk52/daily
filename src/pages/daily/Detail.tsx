@@ -4,6 +4,7 @@ import { postCollection, db } from '../../firebase/apps';
 import { Post, createPostModel } from '../../models/Post';
 import * as H from 'history'
 import { Container } from '../../components/container';
+import { AuthContext } from '../../providers/AuthProvider';
 
 type Params = {
   id: string
@@ -60,6 +61,7 @@ const del = (id: string, history: H.History) => {
 }
 
 export const Detail: React.FC = () => {
+  const { user } = React.useContext(AuthContext);
   const [post, setPost] = React.useState<Post>(null)
   const history = useHistory()
   const params = useParams<Params>()
@@ -91,8 +93,12 @@ export const Detail: React.FC = () => {
                 <button className="bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => backToList(history)}>一覧へ</button>
               </div>
               <div className="w-2/5 text-right">
-                <button className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => update(params.id, history)}>編集</button>
-                <button className="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => del(params.id, history)}>削除</button>
+                {post.author_id == user.uid ? (
+                <>
+                  <button className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => update(params.id, history)}>編集</button>
+                  <button className="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => del(params.id, history)}>削除</button>
+                </>
+                ) : null}
               </div>
             </div>
             <h1>{post.title}</h1>
